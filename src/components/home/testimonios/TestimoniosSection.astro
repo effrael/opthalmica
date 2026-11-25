@@ -1,0 +1,120 @@
+---
+import VideoCard from "./VideoCard.astro";
+
+// Videos en /public/videos (el 8 no existe en el sitio original)
+const videos = [1, 2, 3, 4, 5, 6, 7, 9, 10, 11].map((n) => ({
+  src: `/videos/${n}.mp4`,
+  etiqueta: `Testimonio de paciente ${n}`,
+}));
+---
+
+<section class="bg-[#f5f5f7] py-20 md:py-28" aria-labelledby="video-carousel-title" data-video-carousel>
+  <h2
+    id="video-carousel-title"
+    class="mb-12 px-5 text-center text-[clamp(32px,3.2vw,46px)] leading-[1.06] font-medium tracking-[-0.045em] text-principal md:mb-16"
+  >
+    Pacientes que volvieron a ver el mundo
+  </h2>
+
+  <div
+    data-video-track
+    class="flex cursor-grab touch-pan-y snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth px-[16.667vw] pb-4 select-none [scrollbar-width:none] active:cursor-grabbing md:gap-5 md:px-5 [&.is-dragging]:snap-none [&.is-dragging]:scroll-auto [&::-webkit-scrollbar]:hidden"
+  >
+    {videos.map((video) => <VideoCard src={video.src} etiqueta={video.etiqueta} />)}
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-video-carousel]").forEach((carrusel) => {
+    const pista = carrusel.querySelector<HTMLElement>("[data-video-track]");
+    if (!pista) return;
+
+    let inicioX: number | null = null;
+    let scrollInicial = 0;
+    let reordenando = false;
+
+    // Ancho de una tarjeta + separación
+    const anchoPaso = () => {
+      const tarjeta = pista.querySelector("article");
+      const gap = Number.parseFloat(getComputedStyle(pista).columnGap) || 0;
+      return tarjeta ? tarjeta.getBoundingClientRect().width + gap : 0;
+    };
+
+    // Bucle infinito: mueve la primera/última tarjeta al otro extremo al llegar al borde
+    const reordenar = () => {
+      if (inicioX !== null || reordenando) return;
+      const paso = anchoPaso();
+      if (!paso || pista.children.length < 2) return;
+
+      reordenando = true;
+      if (pista.scrollLeft < paso * 0.5) {
+        const ultima = pista.lastElementChild;
+        if (ultima) {
+          pista.prepend(ultima);
+          pista.scrollLeft += paso;
+        }
+      } else if (pista.scrollLeft > pista.scrollWidth - pista.clientWidth - paso * 0.5) {
+        const primera = pista.firstElementChild;
+        if (primera) {
+          pista.append(primera);
+          pista.scrollLeft -= paso;
+        }
+      }
+      reordenando = false;
+    };
+
+    requestAnimationFrame(() => {
+      const paso = anchoPaso();
+      const ultima = pista.lastElementChild;
+      if (paso && ultima) {
+        pista.prepend(ultima);
+        pista.scrollLeft = paso;
+      }
+    });
+
+    pista.addEventListener("scroll", reordenar, { passive: true });
+
+    // Arrastre con mouse
+    pista.addEventListener("pointerdown", (e) => {
+      if ((e.target as HTMLElement).closest("[data-video-sound]")) return;
+      inicioX = e.clientX;
+      scrollInicial = pista.scrollLeft;
+      pista.classList.add("is-dragging");
+      pista.setPointerCapture(e.pointerId);
+    });
+
+    pista.addEventListener("pointermove", (e) => {
+      if (inicioX === null) return;
+      pista.scrollLeft = scrollInicial - (e.clientX - inicioX) * 0.85;
+    });
+
+    const soltar = (e: PointerEvent) => {
+      if (inicioX === null) return;
+      inicioX = null;
+      if (pista.hasPointerCapture(e.pointerId)) pista.releasePointerCapture(e.pointerId);
+      window.setTimeout(() => {
+        pista.classList.remove("is-dragging");
+        reordenar();
+      }, 80);
+    };
+    pista.addEventListener("pointerup", soltar);
+    pista.addEventListener("pointercancel", soltar);
+
+    // Botón de sonido de cada video
+    carrusel.querySelectorAll<HTMLButtonElement>("[data-video-sound]").forEach((boton) => {
+      const video = boton.closest("article")?.querySelector("video");
+      const iconoMudo = boton.querySelector("[data-muted-icon]");
+      const iconoSonido = boton.querySelector("[data-sound-icon]");
+      if (!video) return;
+
+      boton.addEventListener("click", () => {
+        video.muted = !video.muted;
+        boton.setAttribute("aria-pressed", String(!video.muted));
+        boton.setAttribute("aria-label", video.muted ? "Activar sonido" : "Quitar sonido");
+        iconoMudo?.classList.toggle("hidden", !video.muted);
+        iconoSonido?.classList.toggle("hidden", video.muted);
+        if (video.paused) video.play();
+      });
+    });
+  });
+</script>

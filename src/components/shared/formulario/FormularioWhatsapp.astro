@@ -1,0 +1,66 @@
+---
+import { ArrowUpRight } from "@lucide/astro";
+import CampoFlotante from "./CampoFlotante.astro";
+import SelectFlotante from "./SelectFlotante.astro";
+import { servicios } from "../../../data/servicios";
+import { contacto } from "../../../data/site";
+
+interface Props {
+  /** Si se indica, el servicio va oculto y el formulario se muestra en 3 columnas */
+  servicio?: string;
+}
+
+const { servicio } = Astro.props;
+const compacto = Boolean(servicio);
+---
+
+<form
+  data-whatsapp-form
+  data-numero={contacto.whatsappNumero}
+  class:list={["grid gap-x-5 gap-y-6 sm:grid-cols-2", compacto && "lg:grid-cols-3"]}
+>
+  <CampoFlotante etiqueta="Nombre y Apellidos*" type="text" name="name" required autocomplete="name" ancho={compacto ? "mitad" : "completo"} />
+  <CampoFlotante etiqueta="Celular*" type="tel" name="phone" required autocomplete="tel" inputmode="tel" />
+  <CampoFlotante etiqueta="Correo electrónico*" type="email" name="email" required autocomplete="email" />
+
+  {
+    compacto ? (
+      <input type="hidden" name="service" value={servicio} />
+    ) : (
+      <SelectFlotante etiqueta="Servicio*" name="service" opciones={servicios.map((s) => s.nombre)} />
+    )
+  }
+
+  <p class:list={["text-xs text-slate-600 sm:col-span-2", compacto && "lg:col-span-3"]}>* Indica campos obligatorios</p>
+
+  <button
+    type="submit"
+    class="col-span-full flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full border-2 border-primary bg-primary px-7 font-semibold text-white transition-[color,background-color,border-color,transform] duration-200 hover:bg-white hover:text-primary motion-reduce:transition-none"
+  >
+    Enviar datos
+    <ArrowUpRight size={19} aria-hidden="true" />
+  </button>
+</form>
+
+<script>
+  // Envía los datos del formulario como mensaje de WhatsApp
+  document.querySelectorAll<HTMLFormElement>("[data-whatsapp-form]").forEach((formulario) => {
+    formulario.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!formulario.reportValidity()) return;
+
+      const datos = new FormData(formulario);
+      const mensaje = [
+        "Hola, deseo solicitar información para una cita.",
+        "",
+        `Nombre y Apellidos: ${datos.get("name")}`,
+        `Celular: ${datos.get("phone")}`,
+        `Correo electrónico: ${datos.get("email")}`,
+        `Servicio: ${datos.get("service")}`,
+      ].join("\n");
+
+      const numero = formulario.dataset.numero;
+      window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`, "_blank", "noopener,noreferrer");
+    });
+  });
+</script>

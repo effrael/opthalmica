@@ -1,0 +1,80 @@
+---
+import type { Slide, TemaSlide } from "./slides";
+
+interface Props {
+  slide: Slide;
+  activo: boolean;
+  esPrincipal: boolean;
+}
+
+const { slide, activo, esPrincipal } = Astro.props;
+
+// Las clases van completas (no concatenadas) para que Tailwind las detecte
+const temas: Record<TemaSlide, { slide: string; etiqueta: string; boton: string }> = {
+  azul: {
+    slide: "text-white before:from-[#174a6d]/65 before:via-[#174a6d]/20",
+    etiqueta: "text-white",
+    boton: "border-white bg-white text-primary hover:bg-transparent hover:text-white",
+  },
+  claro: {
+    slide:
+      "text-principal before:from-white/95 before:from-10% before:via-white/60 before:via-35% before:to-55% max-[760px]:before:from-white max-[760px]:before:from-30% max-[760px]:before:via-white/90 max-[760px]:before:via-55% max-[760px]:before:to-white/20 max-[760px]:before:to-82%",
+    etiqueta: "text-primary",
+    boton: "border-primary bg-primary text-white hover:bg-white hover:text-primary",
+  },
+  verde: {
+    slide: "text-white before:from-secondary/45 before:via-secondary/10",
+    etiqueta: "text-white",
+    boton: "border-white bg-white text-secondary hover:bg-secondary hover:text-white",
+  },
+};
+
+const tema = temas[slide.tema];
+// Solo una diapositiva lleva <h1> para no repetir títulos principales en la página
+const Titulo = esPrincipal ? "h1" : "h2";
+---
+
+<article
+  data-carousel-slide
+  aria-hidden={activo ? "false" : "true"}
+  aria-roledescription="diapositiva"
+  style={`background-image: url('${slide.imagen}')`}
+  class:list={[
+    "invisible absolute inset-0 grid h-full translate-x-6 items-center bg-cover bg-center px-[clamp(28px,8vw,150px)] py-5 opacity-0",
+    "transition-[opacity,transform,visibility] duration-500 ease-out motion-reduce:transition-none",
+    "before:absolute before:inset-0 before:bg-linear-to-r before:to-transparent",
+    "aria-[hidden=false]:visible aria-[hidden=false]:z-1 aria-[hidden=false]:translate-x-0 aria-[hidden=false]:opacity-100",
+    "max-[760px]:bg-[position:65%_center] max-[760px]:px-5 max-[760px]:pt-7 max-[760px]:pb-16",
+    tema.slide,
+  ]}
+>
+  <div class="relative z-1 max-w-[680px]">
+    <p class:list={["mb-[14px] text-[clamp(14px,1.3vw,18px)] font-semibold", tema.etiqueta]}>
+      {slide.etiqueta}
+    </p>
+
+    <Titulo
+      class="m-0 max-w-[670px] font-heading text-[clamp(38px,4.2vw,64px)] leading-[1.05] font-semibold tracking-[-0.045em] max-[760px]:text-[clamp(30px,8vw,42px)]"
+    >
+      {slide.titulo}
+    </Titulo>
+
+    <p
+      class="my-[22px] max-w-[590px] text-[clamp(15px,1.3vw,18px)] leading-[1.7] max-[760px]:my-4 max-[760px]:text-sm max-[760px]:leading-[1.55]"
+    >
+      {slide.descripcion}
+    </p>
+
+    <a
+      href={slide.cta.href}
+      tabindex={activo ? undefined : -1}
+      class:list={[
+        "inline-flex min-h-12 cursor-pointer items-center justify-center rounded-full border-2 px-7 font-semibold no-underline",
+        "transition-[color,background-color,border-color,transform] duration-200 motion-reduce:transition-none",
+        tema.boton,
+      ]}
+    >
+      {slide.cta.texto}
+    </a>
+  </div>
+</article>

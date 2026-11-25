@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"a">;
+
+const { class: className, ...attrs } = Astro.props;
+---
+
+<a
+  {...attrs}
+  class:list={[
+    "inline-block rounded-sm text-base font-semibold text-slate-800 transition-[color,translate] duration-300 ease-out",
+    "hover:-translate-y-1 hover:text-primary",
+    "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary",
+    "motion-reduce:translate-none motion-reduce:transition-none",
+    className,
+  ]}
+>
+  <slot />
+</a>

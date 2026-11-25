@@ -1,0 +1,15 @@
+---
+interface Props {
+  icono: any; // componente de @lucide/astro
+  titulo: string;
+  texto: string;
+}
+
+const { icono: Icono, titulo, texto } = Astro.props;
+---
+
+<article class="border-t border-slate-300 pt-7">
+  <Icono size={34} stroke-width={1.7} class="mb-6 text-primary" aria-hidden="true" />
+  <h3 class="max-w-[320px] text-xl leading-tight font-semibold">{titulo}</h3>
+  <p class="mt-4 max-w-[350px] text-sm leading-7 text-slate-600">{texto}</p>
+</article>

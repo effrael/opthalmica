@@ -1,0 +1,52 @@
+---
+import { ArrowUpRight } from "@lucide/astro";
+import type { Servicio } from "../../../data/servicios";
+
+interface Props {
+  servicio: Servicio;
+  numero: number;
+}
+
+const { servicio, numero } = Astro.props;
+const numeroTexto = String(numero).padStart(2, "0");
+---
+
+<article class="group relative isolate min-h-[340px] overflow-hidden rounded-[20px] bg-slate-900 sm:min-h-[380px]">
+  <img
+    src={servicio.imagen}
+    alt=""
+    width="1254"
+    height="1254"
+    loading="lazy"
+    decoding="async"
+    style={`object-position: ${servicio.enfoque}`}
+    class="absolute inset-0 -z-20 h-full w-full object-cover transition-transform duration-500 group-focus-within:scale-105 group-hover:scale-105 motion-reduce:transform-none motion-reduce:transition-none"
+  />
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-linear-to-t from-slate-950/95 via-slate-950/35 to-slate-950/20"></div>
+
+  <div class="flex h-full min-h-[340px] flex-col justify-between p-6 text-white sm:min-h-[380px] sm:p-7">
+    <span class="inline-flex size-10 items-center justify-center self-start rounded-full border border-white/35 bg-slate-950/25 text-xs font-medium tracking-wider backdrop-blur-sm">
+      {numeroTexto}
+    </span>
+
+    <div class="pt-24">
+      <h3 class="max-w-[320px] text-[26px] leading-[1.12] font-medium tracking-tight xl:text-[29px]">
+        <!-- El ::before extiende el enlace a toda la tarjeta -->
+        <a
+          href={servicio.href}
+          aria-label={`Ver información de ${servicio.nombre}`}
+          class="cursor-pointer text-left text-white outline-none! before:absolute before:inset-0 before:z-10 before:rounded-[20px] before:content-[''] focus-visible:before:ring-4 focus-visible:before:ring-primary focus-visible:before:ring-inset"
+        >
+          {servicio.nombre}
+        </a>
+      </h3>
+
+      <div class="mt-5 flex items-center justify-between gap-4 border-t border-white/25 pt-4" aria-hidden="true">
+        <span class="text-xs font-medium text-white/85">Conoce más</span>
+        <span class="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-primary transition-colors group-focus-within:bg-white group-focus-within:text-primary group-hover:bg-white group-hover:text-primary">
+          <ArrowUpRight size={18} />
+        </span>
+      </div>
+    </div>
+  </div>
+</article>

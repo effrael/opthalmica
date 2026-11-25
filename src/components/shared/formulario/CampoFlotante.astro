@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+// Input con etiqueta flotante: la etiqueta sube cuando el campo tiene foco o contenido
+interface Props extends HTMLAttributes<"input"> {
+  etiqueta: string;
+  ancho?: "completo" | "mitad";
+}
+
+const { etiqueta, ancho = "mitad", ...attrs } = Astro.props;
+---
+
+<label class:list={["relative block", ancho === "completo" && "sm:col-span-2"]}>
+  <input
+    {...attrs}
+    placeholder=" "
+    class="peer w-full border-0 border-b border-principal bg-transparent px-0 pt-6 pb-2 text-sm text-principal outline-none focus:border-primary focus:ring-0"
+  />
+  <span
+    class="pointer-events-none absolute top-1 left-0 text-xs text-primary transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-slate-500 peer-focus:top-1 peer-focus:text-xs peer-focus:text-primary"
+  >
+    {etiqueta}
+  </span>
+</label>

@@ -1,0 +1,31 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "../../layouts/Layout.astro";
+import ServicioHero from "../../components/servicio-detalle/ServicioHero.astro";
+import ServicioCita from "../../components/servicio-detalle/ServicioCita.astro";
+import ServicioBeneficios from "../../components/servicio-detalle/ServicioBeneficios.astro";
+import ServicioCuidado from "../../components/servicio-detalle/ServicioCuidado.astro";
+import { servicios, type Servicio } from "../../data/servicios";
+
+// Genera una página por cada servicio de src/data/servicios.ts
+export const getStaticPaths = (() =>
+  servicios.map((servicio) => ({
+    params: { slug: servicio.slug },
+    props: { servicio },
+  }))) satisfies GetStaticPaths;
+
+interface Props {
+  servicio: Servicio;
+}
+
+const { servicio } = Astro.props;
+---
+
+<Layout title={`${servicio.nombre} | Opthalmica Visión`} description={servicio.descripcion}>
+	<div class="text-principal">
+		<ServicioHero servicio={servicio} />
+		<ServicioCita nombreServicio={servicio.nombre} />
+		<ServicioBeneficios nombreServicio={servicio.nombre} />
+		<ServicioCuidado servicio={servicio} />
+	</div>
+</Layout>

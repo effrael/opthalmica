@@ -1,0 +1,54 @@
+---
+import { ArrowUpRight, Sparkles } from "@lucide/astro";
+import ServicioCard from "./ServicioCard.astro";
+import { servicios } from "../../../data/servicios";
+
+interface Props {
+  /** true en /servicios: el título pasa a ser <h1> y se oculta el botón "Ver todos" */
+  esPaginaServicios?: boolean;
+}
+
+const { esPaginaServicios = false } = Astro.props;
+const Titulo = esPaginaServicios ? "h1" : "h2";
+---
+
+<section
+  id="especialidades"
+  aria-labelledby="services-title"
+  class="mx-auto w-[calc(100%-40px)] max-w-[1280px] pt-16 md:w-[calc(100%-112px)] md:pt-[85px]"
+>
+  <div class="mx-auto mb-9 flex max-w-[720px] flex-col items-center text-center md:mb-12">
+    <div>
+      <p class="mb-5 flex items-center justify-center gap-2 text-xs font-medium text-primary">
+        <Sparkles size={20} aria-hidden="true" />
+        Cuidado para toda la vida
+      </p>
+      <Titulo id="services-title" class="text-[clamp(32px,3.2vw,46px)] leading-[1.06] font-medium tracking-[-0.045em]">
+        Conoce nuestros servicios
+      </Titulo>
+    </div>
+
+    <div class="mt-5 max-w-[520px]">
+      <p class="text-sm leading-relaxed text-slate-600">
+        Conoce nuestros servicios y encuentra el cuidado que necesitas. Selecciona una especialidad para ver más información.
+      </p>
+      {
+        !esPaginaServicios && (
+          <a
+            href="/servicios"
+            class="mt-5 inline-flex min-h-11 cursor-pointer items-center gap-5 rounded-full bg-primary px-5 py-3 text-xs font-medium text-white transition-colors hover:bg-[#0074d5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+          >
+            Ver todos los servicios
+            <ArrowUpRight size={18} aria-hidden="true" />
+          </a>
+        )
+      }
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+    {servicios.map((servicio, i) => <ServicioCard servicio={servicio} numero={i + 1} />)}
+  </div>
+
+  <p class="mt-5 text-right text-xs text-slate-500">Una atención que empieza por escucharte.</p>
+</section>

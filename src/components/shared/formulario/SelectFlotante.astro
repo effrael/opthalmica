@@ -1,0 +1,26 @@
+---
+// Select con etiqueta flotante: la etiqueta baja mientras no se elija una opción
+interface Props {
+  etiqueta: string;
+  name: string;
+  opciones: string[];
+}
+
+const { etiqueta, name, opciones } = Astro.props;
+---
+
+<label class="relative block sm:col-span-2">
+  <select
+    name={name}
+    required
+    class="peer w-full cursor-pointer border-0 border-b border-principal bg-transparent px-0 pt-6 pb-2 text-sm text-principal outline-none focus:border-primary focus:ring-0"
+  >
+    <option value="" selected disabled></option>
+    {opciones.map((opcion) => <option value={opcion}>{opcion}</option>)}
+  </select>
+  <span
+    class="pointer-events-none absolute top-1 left-0 text-xs text-primary transition-all duration-200 peer-invalid:top-4 peer-invalid:text-sm peer-invalid:text-slate-500 peer-focus:top-1 peer-focus:text-xs peer-focus:text-primary"
+  >
+    {etiqueta}
+  </span>
+</label>

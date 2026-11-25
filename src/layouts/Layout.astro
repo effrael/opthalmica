@@ -1,23 +1,38 @@
+---
+import "../css/global.css";
+import Header from "../components/shared/header/Header.astro";
+import Footer from "../components/shared/footer/Footer.astro";
+import WhatsappFlotante from "../components/shared/WhatsappFlotante.astro";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = "Opthalmica Visión | Centro Oftalmológico",
+	description = "Opthalmica Visión. Cuidado integral de tus ojos, evaluación visual y atención oftalmológica personalizada en cada etapa de tu vida.",
+} = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/webp" href="/logo.webp" />
+		<link rel="shortcut icon" type="image/webp" href="/logo.webp" />
+		<link rel="apple-touch-icon" href="/logo.webp" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
+		<meta name="description" content={description} />
 	</head>
-	<body>
-		<slot />
+	<body class="text-slate-800 antialiased">
+		<Header />
+		<main class="pt-[84px]">
+			<slot />
+		</main>
+		<Footer />
+		<WhatsappFlotante />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

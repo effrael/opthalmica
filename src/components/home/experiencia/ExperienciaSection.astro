@@ -1,0 +1,43 @@
+---
+// Imagen descargada de opeluce.com.pe (369×347). Reemplazar por una foto propia cuando esté disponible.
+const imagenForoptero = "/images/foroptero.png";
+---
+
+<section aria-labelledby="experience-title" class="bg-white px-5 py-20 md:px-14 md:py-28">
+  <div class="mx-auto max-w-[1280px]">
+    <h2 id="experience-title" class="mb-10 text-center text-[clamp(22px,2vw,30px)] font-normal text-primary">
+      Centro oftalmológico en Iquitos
+    </h2>
+
+    <div class="grid items-center gap-10 lg:grid-cols-[1fr_minmax(360px,520px)_1fr] lg:gap-12">
+      <div class="text-center lg:text-right">
+        <p class="text-primary">
+          <span class="align-top text-[34px] leading-none font-medium">+</span><strong
+            class="text-[clamp(64px,7vw,96px)] leading-none font-semibold">10</strong
+          ><span class="text-[clamp(28px,3vw,44px)] leading-none">años</span>
+        </p>
+        <p class="mt-2 text-base font-medium text-slate-700 md:text-lg">de experiencia en oftalmología</p>
+      </div>
+
+      <img
+        src={imagenForoptero}
+        alt="Foróptero utilizado para realizar evaluaciones oftalmológicas"
+        width="369"
+        height="347"
+        loading="lazy"
+        decoding="async"
+        class="mx-auto aspect-square w-full max-w-[520px] object-contain"
+      />
+
+      <div class="text-center lg:text-left">
+        <p class="text-primary">
+          <span class="align-top text-[34px] leading-none font-medium">+</span><strong
+            class="text-[clamp(64px,7vw,96px)] leading-none font-semibold">100</strong
+          >
+        </p>
+        <p class="text-[clamp(25px,2.5vw,38px)] leading-tight text-primary">colaboradores</p>
+        <p class="mt-1 text-base font-medium text-slate-700 md:text-lg">con experiencia en salud ocular</p>
+      </div>
+    </div>
+  </div>
+</section>

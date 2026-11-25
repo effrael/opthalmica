@@ -1,0 +1,50 @@
+---
+import InfoSede from "./InfoSede.astro";
+import FormularioWhatsapp from "../shared/formulario/FormularioWhatsapp.astro";
+---
+
+<section id="contacto" class="relative isolate overflow-hidden bg-[#f7f7f9]" aria-labelledby="contact-title">
+  <!-- Logo de fondo como marca de agua -->
+  <img
+    src="/logo.webp"
+    alt=""
+    width="356"
+    height="175"
+    aria-hidden="true"
+    class="pointer-events-none absolute top-1/2 left-1/2 z-0 w-[min(72vw,1100px)] -translate-x-1/2 -translate-y-1/2 scale-125 object-contain opacity-[0.045] blur-[5px] select-none"
+  />
+
+  <div class="relative z-1 grid lg:grid-cols-2">
+    <!-- Columna izquierda: presentación y datos de la sede -->
+    <div class="flex min-h-[680px] items-center px-5 py-16 sm:px-10 lg:px-[clamp(48px,7vw,130px)] lg:py-24">
+      <div class="mx-auto w-full max-w-[720px]">
+        <h1 class="text-[clamp(48px,6vw,68px)] leading-[1.03] font-medium tracking-[-0.055em] text-principal">
+          ¿Necesitas asesoría personalizada?
+        </h1>
+        <p class="mt-7 max-w-[700px] text-base leading-7 text-slate-700">
+          En Opthalmica Visión estamos para ayudarte. Contáctanos por WhatsApp, teléfono o visita nuestro local. Tu
+          satisfacción es nuestra prioridad.
+        </p>
+        <InfoSede />
+      </div>
+    </div>
+
+    <!-- Columna derecha: formulario -->
+    <div class="flex min-h-[760px] items-center px-5 py-16 sm:px-10 lg:px-[clamp(48px,7vw,130px)] lg:py-24">
+      <div class="mx-auto w-full max-w-[620px]">
+        <div class="mb-10">
+          <h2
+            id="contact-title"
+            class="text-[clamp(28px,3vw,32px)] leading-[1.1] font-semibold tracking-[-0.035em] text-principal"
+          >
+            Déjanos tus datos y te contactamos
+          </h2>
+          <p class="mt-5 max-w-[520px] text-sm leading-6 text-slate-700">
+            Completa el formulario y te contactamos a la brevedad para coordinar tu cita.
+          </p>
+        </div>
+        <FormularioWhatsapp />
+      </div>
+    </div>
+  </div>
+</section>

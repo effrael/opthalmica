@@ -1,0 +1,24 @@
+@import "@fontsource/poppins/latin-400.css";
+@import "@fontsource/poppins/latin-500.css";
+@import "@fontsource/poppins/latin-600.css";
+@import "@fontsource/poppins/latin-700.css";
+@import "tailwindcss";
+
+@theme {
+    --font-sans: "Poppins", sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+    --font-heading: "Poppins", sans-serif;
+
+    --color-principal: #0b1739;
+    --color-primary: #008cff;
+    --color-secondary: #86bf0b;
+}
+
+@layer base {
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-heading);
+    }
+}

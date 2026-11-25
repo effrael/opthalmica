@@ -1,0 +1,104 @@
+---
+import HeroSlide from "./HeroSlide.astro";
+import { slides } from "./slides";
+
+// Color del punto activo según el tema de cada diapositiva
+const puntoActivo = {
+  azul: "aria-[current=true]:bg-white",
+  claro: "aria-[current=true]:bg-primary",
+  verde: "aria-[current=true]:bg-white",
+};
+---
+
+<section
+  data-carousel
+  aria-roledescription="carrusel"
+  aria-label="Servicios destacados"
+  class="relative h-[500px] cursor-grab touch-pan-y overflow-hidden select-none active:cursor-grabbing"
+>
+  <div class="h-full" data-carousel-track>
+    {slides.map((slide, i) => <HeroSlide slide={slide} activo={i === 0} esPrincipal={i === 0} />)}
+  </div>
+
+  <div
+    class="absolute bottom-6 left-[clamp(28px,8vw,150px)] z-2 flex gap-[9px] max-[760px]:bottom-[22px] max-[760px]:left-5"
+    aria-label="Seleccionar diapositiva"
+  >
+    {
+      slides.map((slide, i) => (
+        <button
+          type="button"
+          data-carousel-dot
+          aria-label={`Mostrar diapositiva ${i + 1}`}
+          aria-current={i === 0 ? "true" : "false"}
+          class:list={[
+            "h-2.5 w-2.5 cursor-pointer rounded-full border-0 bg-[#a8b2c3] p-0",
+            "transition-[width,background-color] duration-200 motion-reduce:transition-none",
+            "aria-[current=true]:w-[30px]",
+            puntoActivo[slide.tema],
+          ]}
+        />
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const INTERVALO = 6000; // ms entre diapositivas
+  const UMBRAL_ARRASTRE = 50; // px mínimos para cambiar al arrastrar
+
+  document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((carrusel) => {
+    const slides = [...carrusel.querySelectorAll<HTMLElement>("[data-carousel-slide]")];
+    const puntos = [...carrusel.querySelectorAll<HTMLButtonElement>("[data-carousel-dot]")];
+    const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let actual = 0;
+    let temporizador: number | undefined;
+
+    const mostrar = (indice: number) => {
+      actual = (indice + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        const activo = i === actual;
+        slide.setAttribute("aria-hidden", String(!activo));
+        slide.querySelectorAll("a").forEach((a) => (activo ? a.removeAttribute("tabindex") : (a.tabIndex = -1)));
+      });
+      puntos.forEach((punto, i) => punto.setAttribute("aria-current", String(i === actual)));
+    };
+
+    const detener = () => window.clearInterval(temporizador);
+    const iniciar = () => {
+      detener();
+      if (!reducirMovimiento) temporizador = window.setInterval(() => mostrar(actual + 1), INTERVALO);
+    };
+
+    puntos.forEach((punto, i) =>
+      punto.addEventListener("click", () => {
+        mostrar(i);
+        iniciar();
+      })
+    );
+
+    // Arrastrar con mouse o deslizar con el dedo
+    let inicioX: number | null = null;
+    carrusel.addEventListener("pointerdown", (e) => {
+      if ((e.target as HTMLElement).closest("a, button")) return;
+      inicioX = e.clientX;
+    });
+    window.addEventListener("pointerup", (e) => {
+      if (inicioX === null) return;
+      const distancia = e.clientX - inicioX;
+      inicioX = null;
+      if (Math.abs(distancia) < UMBRAL_ARRASTRE) return;
+      mostrar(actual + (distancia < 0 ? 1 : -1));
+      iniciar();
+    });
+
+    // Pausa mientras el usuario interactúa
+    carrusel.addEventListener("mouseenter", detener);
+    carrusel.addEventListener("mouseleave", iniciar);
+    carrusel.addEventListener("focusin", detener);
+    carrusel.addEventListener("focusout", iniciar);
+
+    iniciar();
+  });
+</script>

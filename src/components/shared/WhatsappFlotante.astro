@@ -1,0 +1,23 @@
+---
+import Whatsapp from "../../assets/icons/whatsapp.svg";
+import { contacto } from "../../data/site";
+---
+
+<div class="group fixed right-5 bottom-5 z-40 flex items-center gap-3 sm:right-7 sm:bottom-7">
+  <!-- Burbuja que aparece al pasar el mouse -->
+  <div
+    class="pointer-events-none translate-x-2 rounded-lg bg-principal px-4 py-2 text-right text-xs leading-4 font-medium whitespace-nowrap text-white opacity-0 shadow-lg transition-[opacity,transform] duration-200 ease-out group-focus-within:translate-x-0 group-focus-within:opacity-100 group-hover:translate-x-0 group-hover:opacity-100"
+  >
+    ¿Cómo te podemos <br /> ayudar?
+  </div>
+
+  <a
+    href={contacto.whatsappInfo}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Consultar por WhatsApp"
+    class="flex size-16 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_24px_rgb(37_211_102/0.38)] transition-[transform,box-shadow] duration-200 hover:scale-105 hover:shadow-[0_10px_30px_rgb(37_211_102/0.5)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#25D366] motion-reduce:transition-none"
+  >
+    <Whatsapp width={32} height={32} class="size-8" aria-hidden="true" />
+  </a>
+</div>

@@ -1,0 +1,46 @@
+---
+import { ChevronDown } from "@lucide/astro";
+import NavLink from "./NavLink.astro";
+import { servicios } from "../../../data/servicios";
+
+const mitad = Math.ceil(servicios.length / 2);
+const columnas = [servicios.slice(0, mitad), servicios.slice(mitad)];
+---
+
+<div class="group relative flex h-full items-center">
+  <NavLink href="/servicios" class="inline-flex! items-center gap-1.5 whitespace-nowrap" aria-haspopup="true">
+    Servicios
+    <ChevronDown
+      size={17}
+      class="transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+      aria-hidden="true"
+    />
+  </NavLink>
+
+  <div
+    class="pointer-events-none invisible absolute top-full left-1/2 z-60 w-[min(820px,calc(100vw-48px))] -translate-x-1/2 translate-y-2 pt-3 opacity-0 transition-[opacity,transform,visibility] duration-200 ease-out group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100"
+  >
+    <div class="grid grid-cols-2 overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_18px_45px_rgb(15_23_42/0.16)]">
+      {
+        columnas.map((columna, i) => (
+          <div class={i === 0 ? "border-r border-slate-200 pr-5" : "pl-5"}>
+            {columna.map((servicio) => (
+              <a
+                href={servicio.href}
+                class="group/item flex items-center justify-between gap-4 rounded-lg px-4 py-3 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-primary"
+              >
+                <span>{servicio.nombre}</span>
+                <span
+                  class="text-xl leading-none text-slate-400 transition-transform group-hover/item:translate-x-1 group-hover/item:text-primary"
+                  aria-hidden="true"
+                >
+                  ›
+                </span>
+              </a>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>

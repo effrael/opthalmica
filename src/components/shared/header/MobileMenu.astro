@@ -1,0 +1,93 @@
+---
+import { CalendarDays, ChevronDown } from "@lucide/astro";
+import NavLink from "./NavLink.astro";
+import { contacto, navegacion } from "../../../data/site";
+import { servicios } from "../../../data/servicios";
+---
+
+<details class="mobile-menu hidden max-[950px]:block">
+  <summary
+    class="flex cursor-pointer list-none items-center gap-4 pr-5 text-xs outline-none [&::-webkit-details-marker]:hidden"
+    aria-label="Abrir menú"
+  >
+    Menú <span class="text-[21px] text-primary" aria-hidden="true">☰</span>
+  </summary>
+
+  <button
+    type="button"
+    data-mobile-overlay
+    class="fixed inset-x-0 top-[84px] bottom-0 z-10 cursor-default border-0 bg-black/60 p-0 backdrop-blur-md"
+    aria-label="Cerrar menú"
+  ></button>
+
+  <nav
+    data-mobile-panel
+    aria-label="Navegación móvil"
+    class="fixed top-[84px] right-0 z-20 flex h-[calc(100dvh-84px)] w-3/4 min-w-[290px] flex-col gap-1 overflow-y-auto border-t border-primary/15 bg-white px-5 py-5 shadow-2xl sm:px-8"
+  >
+    {
+      navegacion.map((item) =>
+        item.conSubmenu ? (
+          <details class="group/services px-3">
+            <summary class="flex cursor-pointer list-none items-center justify-between rounded-lg py-3 font-semibold text-slate-800 outline-none transition-colors hover:text-primary focus-visible:text-primary [&::-webkit-details-marker]:hidden">
+              {item.label}
+              <ChevronDown size={18} class="transition-transform group-open/services:rotate-180" aria-hidden="true" />
+            </summary>
+            <div class="mb-3 grid border-l border-primary/25 pl-3">
+              {servicios.map((servicio) => (
+                <a
+                  href={servicio.href}
+                  class="rounded-r-lg px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-primary/10 hover:text-primary"
+                >
+                  {servicio.nombre}
+                </a>
+              ))}
+            </div>
+          </details>
+        ) : (
+          <NavLink href={item.href} class="px-3 py-3">
+            {item.label}
+          </NavLink>
+        )
+      )
+    }
+
+    <div class="mt-3 px-3">
+      <a
+        href={contacto.whatsappCita}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex w-full items-center justify-center gap-3 rounded-lg bg-[#8bc418] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#78aa14]"
+      >
+        <CalendarDays size={20} aria-hidden="true" />
+        Reserva tu cita online
+      </a>
+    </div>
+  </nav>
+</details>
+
+<script>
+  // Cierra el menú al tocar el fondo oscuro o al cambiar a escritorio
+  const menu = document.querySelector<HTMLDetailsElement>(".mobile-menu");
+  const overlay = menu?.querySelector("[data-mobile-overlay]");
+
+  overlay?.addEventListener("click", () => menu?.removeAttribute("open"));
+
+  // Animación de entrada: el fondo aparece y el panel se desliza desde la derecha
+  menu?.addEventListener("toggle", () => {
+    if (!menu.open) return;
+    const panel = menu.querySelector("[data-mobile-panel]");
+    overlay?.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: "ease-out" });
+    panel?.animate(
+      [
+        { opacity: 0, transform: "translateX(24px)" },
+        { opacity: 1, transform: "translateX(0)" },
+      ],
+      { duration: 240, easing: "ease-out" }
+    );
+  });
+
+  window.matchMedia("(min-width: 951px)").addEventListener("change", (e) => {
+    if (e.matches) menu?.removeAttribute("open");
+  });
+</script>
