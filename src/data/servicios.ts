@@ -17,7 +17,7 @@ const lista: Omit<Servicio, "href">[] = [
   {
     nombre: "Consulta oftalmológica integral",
     slug: "consulta-oftalmologica-integral",
-    imagen: "/images/services/consulta_integral.png",
+    imagen: "/images/services/consulta_integral.webp",
     enfoque: "center",
     descripcion: "Evaluación completa de la salud visual para niños, adultos y adultos mayores.",
     tituloCuidado: "Una evaluación completa para cuidar tu visión",
@@ -30,7 +30,7 @@ const lista: Omit<Servicio, "href">[] = [
   {
     nombre: "Catarata",
     slug: "catarata",
-    imagen: "/images/services/catarata.png",
+    imagen: "/images/services/catarata.webp",
     enfoque: "center",
     descripcion:
       "Evaluación, diagnóstico y tratamiento quirúrgico, con estudio preoperatorio y cálculo de lente intraocular.",
@@ -44,7 +44,7 @@ const lista: Omit<Servicio, "href">[] = [
   {
     nombre: "Glaucoma",
     slug: "glaucoma",
-    imagen: "/images/services/glaucoma.png",
+    imagen: "/images/services/glaucoma.webp",
     enfoque: "center",
     descripcion: "Detección, diagnóstico, tratamiento y seguimiento orientados a preservar la función visual.",
     tituloCuidado: "Detección y seguimiento para proteger tu visión",
@@ -57,7 +57,7 @@ const lista: Omit<Servicio, "href">[] = [
   {
     nombre: "Retina y mácula",
     slug: "retina-y-macula",
-    imagen: "/images/services/retinaymacula.png",
+    imagen: "/images/services/retinaymacula.webp",
     enfoque: "center",
     descripcion:
       "Evaluación de enfermedades retinianas y maculares, incluidas alteraciones relacionadas con diabetes y edad.",
@@ -71,7 +71,7 @@ const lista: Omit<Servicio, "href">[] = [
   {
     nombre: "Córnea y superficie ocular",
     slug: "cornea-y-superficie-ocular",
-    imagen: "/images/services/superficie_ocular.png",
+    imagen: "/images/services/superficie_ocular.webp",
     enfoque: "center",
     descripcion:
       "Diagnóstico y tratamiento de enfermedades corneales, ojo seco, alergias y otras alteraciones de la superficie ocular.",
@@ -85,7 +85,7 @@ const lista: Omit<Servicio, "href">[] = [
   {
     nombre: "Oftalmología pediátrica y estrabismo",
     slug: "oftalmologia-pediatrica-y-estrabismo",
-    imagen: "/images/services/oftalmologia_pediatrica_estrabismo.png",
+    imagen: "/images/services/oftalmologia_pediatrica_estrabismo.webp",
     enfoque: "center",
     descripcion: "Evaluación visual infantil, estrabismo, ambliopía y otros trastornos del desarrollo visual.",
     tituloCuidado: "Cuidamos la visión desde los primeros años",
@@ -98,7 +98,7 @@ const lista: Omit<Servicio, "href">[] = [
   {
     nombre: "Cirugía oftalmológica",
     slug: "cirugia-oftalmologica",
-    imagen: "/images/services/cirugia_oftalmologica.png",
+    imagen: "/images/services/cirugia_oftalmologica.webp",
     enfoque: "center",
     descripcion:
       "Tratamiento quirúrgico de diferentes enfermedades oculares, con evaluación individualizada y seguimiento postoperatorio.",
@@ -112,7 +112,7 @@ const lista: Omit<Servicio, "href">[] = [
   {
     nombre: "Urgencias y trauma ocular",
     slug: "urgencias-y-trauma-ocular",
-    imagen: "/images/services/urgencia_trauma_ocular.png",
+    imagen: "/images/services/urgencia_trauma_ocular.webp",
     enfoque: "center",
     descripcion:
       "Evaluación de lesiones, cuerpos extraños, infecciones y otros problemas oculares que requieren atención oportuna.",
@@ -126,7 +126,7 @@ const lista: Omit<Servicio, "href">[] = [
   {
     nombre: "Exámenes oftalmológicos especializados",
     slug: "examenes-oftalmologicos-especializados",
-    imagen: "/images/services/examen_especializado.png",
+    imagen: "/images/services/examen_especializado.webp",
     enfoque: "center",
     descripcion:
       "Tecnología diagnóstica para complementar la evaluación médica y estudiar con precisión las estructuras y funciones del ojo.",
