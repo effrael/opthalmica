@@ -11,14 +11,14 @@ const { servicio } = Astro.props;
 <section class="overflow-hidden bg-[#f7f8fa]">
   <div class="mx-auto grid max-w-7xl lg:h-[500px] lg:grid-cols-2">
     <div class="flex items-center px-6 py-14 sm:px-10 lg:px-16 lg:pb-28">
-      <div class="max-w-xl">
+      <div data-reveal="left" class="max-w-xl">
         <p class="mb-4 text-sm font-medium text-primary">Servicios oftalmológicos</p>
         <h1 class="text-4xl leading-tight font-semibold tracking-tight sm:text-5xl lg:text-6xl">{servicio.nombre}</h1>
         <p class="mt-6 max-w-lg text-base leading-7 text-slate-600 sm:text-lg">{servicio.descripcion}</p>
       </div>
     </div>
 
-    <img
+    <img data-reveal="fade"
       src={servicio.imagen}
       alt={`Atención de ${servicio.nombre}`}
       width="1000"

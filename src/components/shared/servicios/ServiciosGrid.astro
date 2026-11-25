@@ -17,7 +17,7 @@ const Titulo = esPaginaServicios ? "h1" : "h2";
   aria-labelledby="services-title"
   class="mx-auto w-[calc(100%-40px)] max-w-[1280px] pt-16 md:w-[calc(100%-112px)] md:pt-[85px]"
 >
-  <div class="mx-auto mb-9 flex max-w-[720px] flex-col items-center text-center md:mb-12">
+  <div data-reveal class="mx-auto mb-9 flex max-w-[720px] flex-col items-center text-center md:mb-12">
     <div>
       <p class="mb-5 flex items-center justify-center gap-2 text-xs font-medium text-primary">
         <Sparkles size={20} aria-hidden="true" />
@@ -50,5 +50,5 @@ const Titulo = esPaginaServicios ? "h1" : "h2";
     {servicios.map((servicio, i) => <ServicioCard servicio={servicio} numero={i + 1} />)}
   </div>
 
-  <p class="mt-5 text-right text-xs text-slate-500">Una atención que empieza por escucharte.</p>
+  <p data-reveal="fade" class="mt-5 text-right text-xs text-slate-500">Una atención que empieza por escucharte.</p>
 </section>

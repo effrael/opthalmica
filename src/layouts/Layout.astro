@@ -3,6 +3,7 @@ import "../css/global.css";
 import Header from "../components/shared/header/Header.astro";
 import Footer from "../components/shared/footer/Footer.astro";
 import WhatsappFlotante from "../components/shared/WhatsappFlotante.astro";
+import AnimacionesEntrada from "../components/shared/AnimacionesEntrada.astro";
 
 interface Props {
 	title?: string;
@@ -19,6 +20,8 @@ const {
 <html lang="es">
 	<head>
 		<meta charset="utf-8" />
+		<!-- Marca que hay JavaScript, para que las animaciones de entrada puedan ocultar el contenido antes de mostrarlo -->
+		<script is:inline>document.documentElement.classList.add("js");</script>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/webp" href="/logo.webp" />
 		<link rel="shortcut icon" type="image/webp" href="/logo.webp" />
@@ -34,5 +37,6 @@ const {
 		</main>
 		<Footer />
 		<WhatsappFlotante />
+		<AnimacionesEntrada />
 	</body>
 </html>

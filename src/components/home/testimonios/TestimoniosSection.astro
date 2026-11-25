@@ -9,14 +9,14 @@ const videos = [1, 2, 3, 4, 5, 6, 7, 9, 10, 11].map((n) => ({
 ---
 
 <section class="bg-[#f5f5f7] py-20 md:py-28" aria-labelledby="video-carousel-title" data-video-carousel>
-  <h2
+  <h2 data-reveal
     id="video-carousel-title"
     class="mb-12 px-5 text-center text-[clamp(32px,3.2vw,46px)] leading-[1.06] font-medium tracking-[-0.045em] text-principal md:mb-16"
   >
     Pacientes que volvieron a ver el mundo
   </h2>
 
-  <div
+  <div data-reveal
     data-video-track
     class="flex cursor-grab touch-pan-y snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth px-[16.667vw] pb-4 select-none [scrollbar-width:none] active:cursor-grabbing md:gap-5 md:px-5 [&.is-dragging]:snap-none [&.is-dragging]:scroll-auto [&::-webkit-scrollbar]:hidden"
   >

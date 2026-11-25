@@ -11,7 +11,7 @@ const { servicio } = Astro.props;
 
 <section class="px-6 py-20 sm:px-10 lg:py-28">
   <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2 lg:gap-20">
-    <div>
+    <div data-reveal="left">
       <p class="text-sm font-semibold tracking-wider text-primary uppercase">Cuidado integral</p>
       <h2 class="mt-4 text-3xl leading-tight font-semibold tracking-tight sm:text-5xl">{servicio.tituloCuidado}</h2>
       <ul class="mt-8 space-y-5">
@@ -26,7 +26,7 @@ const { servicio } = Astro.props;
       </ul>
     </div>
 
-    <img
+    <img data-reveal="right"
       src={servicio.imagen}
       alt=""
       width="1000"

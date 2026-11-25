@@ -18,7 +18,7 @@ const urlMapa = `https://maps.google.com/maps?${parametros}`;
 ---
 
 <section aria-label="Ubicación de la sede en Google Maps" class="bg-[#f7f7f9]">
-  <iframe
+  <iframe data-reveal="fade"
     src={urlMapa}
     title={`Mapa: ${contacto.direccion.join(" ")}`}
     class="block h-[360px] w-full border-0 md:h-[450px]"

@@ -35,17 +35,17 @@ const beneficios = [
 <!-- El -mt y pt grandes hacen que el fondo empiece detrás de la tarjeta del formulario -->
 <section class="-mt-20 bg-[#e7f8fb] px-6 pt-40 pb-20 sm:px-10 sm:pt-44 lg:pb-24">
   <div class="mx-auto max-w-5xl">
-    <h2 class="text-center text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">
+    <h2 data-reveal class="text-center text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">
       {nombreServicio} <span class="text-primary">con atención especializada</span>
     </h2>
-    <p class="mx-auto mt-3 max-w-2xl text-center text-sm leading-6 text-slate-600 sm:text-base">
+    <p data-reveal class="mx-auto mt-3 max-w-2xl text-center text-sm leading-6 text-slate-600 sm:text-base">
       Cuidamos tu visión con experiencia médica, tecnología especializada y un acompañamiento cercano.
     </p>
 
     <div class="mt-12 grid gap-x-16 gap-y-10 md:grid-cols-2">
       {
         beneficios.map(({ icono: Icono, titulo, texto }) => (
-          <article class="flex gap-5">
+          <article data-reveal class="flex gap-5">
             <Icono size={48} stroke-width={1.35} class="shrink-0 text-primary" aria-hidden="true" />
             <div>
               <h3 class="font-semibold">{titulo}</h3>

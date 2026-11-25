@@ -7,7 +7,7 @@ interface Props {
 const { titulo } = Astro.props;
 ---
 
-<nav class="pt-16 md:pt-20" aria-label={titulo}>
+<nav data-reveal class="pt-16 md:pt-20" aria-label={titulo}>
   <h2 class="mb-7 text-base font-semibold text-principal">{titulo}</h2>
   <ul class="space-y-4">
     <slot />

@@ -1,0 +1,37 @@
+---
+// Activa las animaciones de entrada de todo el sitio.
+// Los estilos están en src/css/global.css (sección "Animaciones de entrada").
+// Para animar un elemento basta con agregarle data-reveal.
+---
+
+<script>
+  const elementos = document.querySelectorAll<HTMLElement>("[data-reveal]");
+  const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const mostrar = (el: HTMLElement) => el.classList.add("is-visible");
+
+  if (reducirMovimiento || !("IntersectionObserver" in window)) {
+    elementos.forEach(mostrar);
+  } else {
+    const PASO = 90; // ms entre elementos que aparecen juntos
+    const MAX_PASOS = 5;
+
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        // Los que entran a la vez aparecen en cascada, uno tras otro
+        entradas
+          .filter((entrada) => entrada.isIntersecting)
+          .forEach((entrada, i) => {
+            const el = entrada.target as HTMLElement;
+            const retraso = el.dataset.revealDelay ?? String(Math.min(i, MAX_PASOS) * PASO);
+            el.style.setProperty("--reveal-delay", `${retraso}ms`);
+            mostrar(el);
+            observador.unobserve(el);
+          });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+    );
+
+    elementos.forEach((el) => observador.observe(el));
+  }
+</script>

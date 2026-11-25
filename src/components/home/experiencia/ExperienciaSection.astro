@@ -5,12 +5,12 @@ const imagenForoptero = "/images/foroptero.webp";
 
 <section aria-labelledby="experience-title" class="bg-white px-5 py-20 md:px-14 md:py-28">
   <div class="mx-auto max-w-[1280px]">
-    <h2 id="experience-title" class="mb-10 text-center text-[clamp(22px,2vw,30px)] font-normal text-primary">
+    <h2 data-reveal id="experience-title" class="mb-10 text-center text-[clamp(22px,2vw,30px)] font-normal text-primary">
       Centro oftalmológico en Iquitos
     </h2>
 
     <div class="grid items-center gap-10 lg:grid-cols-[1fr_minmax(360px,520px)_1fr] lg:gap-12">
-      <div class="text-center lg:text-right">
+      <div data-reveal="left" class="text-center lg:text-right">
         <p class="text-primary">
           <span class="align-top text-[34px] leading-none font-medium">+</span><strong
             class="text-[clamp(64px,7vw,96px)] leading-none font-semibold">10</strong
@@ -19,7 +19,7 @@ const imagenForoptero = "/images/foroptero.webp";
         <p class="mt-2 text-base font-medium text-slate-700 md:text-lg">de experiencia en oftalmología</p>
       </div>
 
-      <img
+      <img data-reveal="zoom"
         src={imagenForoptero}
         alt="Foróptero utilizado para realizar evaluaciones oftalmológicas"
         width="369"
@@ -29,7 +29,7 @@ const imagenForoptero = "/images/foroptero.webp";
         class="mx-auto aspect-square w-full max-w-[520px] object-contain"
       />
 
-      <div class="text-center lg:text-left">
+      <div data-reveal="right" class="text-center lg:text-left">
         <p class="text-primary">
           <span class="align-top text-[34px] leading-none font-medium">+</span><strong
             class="text-[clamp(64px,7vw,96px)] leading-none font-semibold">100</strong

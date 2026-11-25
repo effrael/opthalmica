@@ -14,7 +14,7 @@ const { servicio } = Astro.props;
 const compacto = Boolean(servicio);
 ---
 
-<form
+<form data-reveal
   data-whatsapp-form
   data-numero={contacto.whatsappNumero}
   class:list={["grid gap-x-5 gap-y-6 sm:grid-cols-2", compacto && "lg:grid-cols-3"]}
