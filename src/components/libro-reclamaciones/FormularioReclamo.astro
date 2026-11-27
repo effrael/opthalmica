@@ -1,0 +1,167 @@
+---
+import { ArrowUpRight } from "@lucide/astro";
+import CampoFlotante from "../shared/formulario/CampoFlotante.astro";
+import { contacto, empresa } from "../../data/site";
+
+// Estilos compartidos por los bloques del formulario
+const claseBloque = "grid gap-x-5 gap-y-6 border-t border-slate-300 pt-8 sm:grid-cols-2";
+const claseTituloBloque = "text-sm font-semibold text-principal sm:col-span-2";
+const claseTextarea =
+  "peer w-full resize-y border-0 border-b border-principal bg-transparent px-0 pt-6 pb-2 text-sm text-principal outline-none focus:border-primary focus:ring-0";
+const claseEtiquetaFlotante =
+  "pointer-events-none absolute top-1 left-0 text-xs text-primary transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-placeholder-shown:text-slate-500 peer-focus:top-1 peer-focus:text-xs peer-focus:text-primary";
+const claseOpcion =
+  "flex cursor-pointer items-center gap-3 rounded-xl border border-slate-300 px-4 py-3 text-sm text-principal transition-colors has-checked:border-primary has-checked:bg-primary/5";
+---
+
+<form data-reveal data-libro-reclamaciones data-numero={contacto.whatsappNumero} class="grid gap-10">
+  <!-- Cabecera de la hoja de reclamación -->
+  <div class="grid gap-4 rounded-2xl bg-white p-6 text-sm text-slate-700 sm:grid-cols-2">
+    <p><span class="block text-xs text-slate-500">Fecha</span><span data-fecha>—</span></p>
+    <p><span class="block text-xs text-slate-500">Hoja de reclamación N.º</span><span data-codigo>—</span></p>
+    <p class="sm:col-span-2">
+      <span class="block text-xs text-slate-500">Proveedor</span>
+      {empresa.razonSocial} · RUC {empresa.ruc}<br />{empresa.direccion}
+    </p>
+  </div>
+
+  <!-- 1. Consumidor -->
+  <fieldset class={claseBloque}>
+    <legend class={claseTituloBloque}>1. Identificación del consumidor reclamante</legend>
+    <CampoFlotante etiqueta="Nombre y Apellidos*" type="text" name="nombre" required autocomplete="name" ancho="completo" />
+    <label class="relative block">
+      <select name="tipoDocumento" required class="w-full cursor-pointer border-0 border-b border-principal bg-transparent px-0 pt-6 pb-2 text-sm text-principal outline-none focus:border-primary focus:ring-0">
+        <option value="DNI">DNI</option>
+        <option value="Carné de extranjería">Carné de extranjería</option>
+        <option value="Pasaporte">Pasaporte</option>
+      </select>
+      <span class="pointer-events-none absolute top-1 left-0 text-xs text-primary">Tipo de documento*</span>
+    </label>
+    <CampoFlotante etiqueta="N.º de documento*" type="text" name="documento" required inputmode="numeric" />
+    <CampoFlotante etiqueta="Domicilio*" type="text" name="domicilio" required autocomplete="street-address" ancho="completo" />
+    <CampoFlotante etiqueta="Celular*" type="tel" name="celular" required autocomplete="tel" inputmode="tel" />
+    <CampoFlotante etiqueta="Correo electrónico*" type="email" name="correo" required autocomplete="email" />
+
+    <label class="flex items-center gap-3 text-sm text-slate-700 sm:col-span-2">
+      <input type="checkbox" name="menor" data-menor class="size-4 accent-primary" />
+      El consumidor es menor de edad
+    </label>
+    <div data-apoderado hidden class="sm:col-span-2">
+      <CampoFlotante etiqueta="Nombre del padre, madre o apoderado*" type="text" name="apoderado" ancho="completo" />
+    </div>
+  </fieldset>
+
+  <!-- 2. Bien contratado -->
+  <fieldset class={claseBloque}>
+    <legend class={claseTituloBloque}>2. Identificación del bien contratado</legend>
+    <label class={claseOpcion}>
+      <input type="radio" name="tipoBien" value="Servicio" required checked class="accent-primary" /> Servicio
+    </label>
+    <label class={claseOpcion}>
+      <input type="radio" name="tipoBien" value="Producto" class="accent-primary" /> Producto
+    </label>
+    <CampoFlotante etiqueta="Monto reclamado (S/)" type="number" name="monto" min="0" step="0.01" inputmode="decimal" />
+    <CampoFlotante etiqueta="Fecha de atención o compra" type="date" name="fechaAtencion" />
+    <label class="relative block sm:col-span-2">
+      <textarea name="descripcionBien" required rows="2" placeholder=" " class={claseTextarea}></textarea>
+      <span class={claseEtiquetaFlotante}>Descripción del producto o servicio*</span>
+    </label>
+  </fieldset>
+
+  <!-- 3. Detalle -->
+  <fieldset class={claseBloque}>
+    <legend class={claseTituloBloque}>3. Detalle de la reclamación y pedido del consumidor</legend>
+    <label class={claseOpcion}>
+      <input type="radio" name="tipo" value="Reclamo" required checked class="accent-primary" />
+      <span><strong class="font-semibold">Reclamo</strong><br /><span class="text-xs text-slate-500">Disconformidad con el producto o servicio.</span></span>
+    </label>
+    <label class={claseOpcion}>
+      <input type="radio" name="tipo" value="Queja" class="accent-primary" />
+      <span><strong class="font-semibold">Queja</strong><br /><span class="text-xs text-slate-500">Malestar con la atención al público.</span></span>
+    </label>
+    <label class="relative block sm:col-span-2">
+      <textarea name="detalle" required rows="4" placeholder=" " class={claseTextarea}></textarea>
+      <span class={claseEtiquetaFlotante}>Detalle*</span>
+    </label>
+    <label class="relative block sm:col-span-2">
+      <textarea name="pedido" required rows="3" placeholder=" " class={claseTextarea}></textarea>
+      <span class={claseEtiquetaFlotante}>Pedido*</span>
+    </label>
+  </fieldset>
+
+  <div class="grid gap-4 border-t border-slate-300 pt-8 text-xs leading-6 text-slate-600">
+    <label class="flex items-start gap-3 text-sm text-slate-700">
+      <input type="checkbox" required class="mt-1 size-4 accent-primary" />
+      Declaro que los datos consignados son verdaderos y acepto el tratamiento de mis datos personales para la atención
+      de esta reclamación.*
+    </label>
+    <p>
+      La formulación del reclamo no impide acudir a otras vías de solución de controversias ni es requisito previo para
+      interponer una denuncia ante el INDECOPI. El proveedor deberá dar respuesta al reclamo en un plazo no mayor a
+      {empresa.plazoRespuesta} días hábiles.
+    </p>
+    <p>* Indica campos obligatorios</p>
+  </div>
+
+  <button
+    type="submit"
+    class="flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full border-2 border-primary bg-primary px-7 font-semibold text-white transition-[color,background-color,border-color] duration-200 hover:bg-white hover:text-primary motion-reduce:transition-none"
+  >
+    Enviar reclamación
+    <ArrowUpRight size={19} aria-hidden="true" />
+  </button>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>("[data-libro-reclamaciones]").forEach((formulario) => {
+    // Fecha de hoy y código correlativo de la hoja (año-mes-día + hora)
+    const ahora = new Date();
+    const fecha = ahora.toLocaleDateString("es-PE", { day: "2-digit", month: "2-digit", year: "numeric" });
+    const pad = (n: number) => String(n).padStart(2, "0");
+    const codigo = `LR-${ahora.getFullYear()}${pad(ahora.getMonth() + 1)}${pad(ahora.getDate())}-${pad(ahora.getHours())}${pad(ahora.getMinutes())}${pad(ahora.getSeconds())}`;
+    formulario.querySelector("[data-fecha]")!.textContent = fecha;
+    formulario.querySelector("[data-codigo]")!.textContent = codigo;
+
+    // Muestra el campo del apoderado solo si el consumidor es menor de edad
+    const menor = formulario.querySelector<HTMLInputElement>("[data-menor]")!;
+    const apoderado = formulario.querySelector<HTMLElement>("[data-apoderado]")!;
+    const campoApoderado = apoderado.querySelector("input")!;
+    menor.addEventListener("change", () => {
+      apoderado.hidden = !menor.checked;
+      campoApoderado.required = menor.checked;
+    });
+
+    // Envía la hoja de reclamación como mensaje de WhatsApp
+    formulario.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!formulario.reportValidity()) return;
+
+      const d = new FormData(formulario);
+      const lineas = [
+        `*LIBRO DE RECLAMACIONES — Hoja N.º ${codigo}*`,
+        `Fecha: ${fecha}`,
+        "",
+        "*1. Consumidor*",
+        `Nombre: ${d.get("nombre")}`,
+        `${d.get("tipoDocumento")}: ${d.get("documento")}`,
+        `Domicilio: ${d.get("domicilio")}`,
+        `Celular: ${d.get("celular")}`,
+        `Correo: ${d.get("correo")}`,
+        ...(menor.checked ? [`Menor de edad. Apoderado: ${d.get("apoderado")}`] : []),
+        "",
+        "*2. Bien contratado*",
+        `Tipo: ${d.get("tipoBien")}`,
+        `Monto reclamado: ${d.get("monto") ? `S/ ${d.get("monto")}` : "—"}`,
+        `Fecha de atención: ${d.get("fechaAtencion") || "—"}`,
+        `Descripción: ${d.get("descripcionBien")}`,
+        "",
+        `*3. ${d.get("tipo")}*`,
+        `Detalle: ${d.get("detalle")}`,
+        `Pedido: ${d.get("pedido")}`,
+      ];
+
+      const numero = formulario.dataset.numero;
+      window.open(`https://wa.me/${numero}?text=${encodeURIComponent(lineas.join("\n"))}`, "_blank", "noopener,noreferrer");
+    });
+  });
+</script>

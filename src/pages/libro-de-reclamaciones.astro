@@ -1,0 +1,46 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FormularioReclamo from "../components/libro-reclamaciones/FormularioReclamo.astro";
+import { empresa } from "../data/site";
+---
+
+<Layout
+  title="Libro de Reclamaciones | Opthalmica Visión"
+  description="Libro de Reclamaciones virtual de Opthalmica Visión. Registra tu reclamo o queja conforme al Código de Protección y Defensa del Consumidor."
+>
+  <section class="bg-[#f7f7f9] px-5 py-16 text-principal sm:px-10 md:py-24 lg:px-14" aria-labelledby="libro-titulo">
+    <div class="mx-auto grid max-w-[1280px] gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+      <!-- Columna izquierda: explicación -->
+      <div data-reveal="left" class="lg:sticky lg:top-[120px] lg:self-start">
+        <p class="mb-5 text-xs font-semibold tracking-[0.16em] text-primary uppercase">Atención al cliente</p>
+        <h1 id="libro-titulo" class="text-[clamp(40px,5vw,60px)] leading-[1.03] font-medium tracking-[-0.055em]">
+          Libro de Reclamaciones
+        </h1>
+        <p class="mt-7 max-w-[460px] text-sm leading-7 text-slate-600">
+          Conforme a lo establecido en el Código de Protección y Defensa del Consumidor (Ley N.º 29571), ponemos a tu
+          disposición nuestro Libro de Reclamaciones virtual.
+        </p>
+
+        <dl class="mt-10 space-y-6 border-l border-slate-300 pl-7 text-sm">
+          <div>
+            <dt class="font-semibold">Reclamo</dt>
+            <dd class="mt-1 leading-6 text-slate-600">Disconformidad relacionada con los productos o servicios brindados.</dd>
+          </div>
+          <div>
+            <dt class="font-semibold">Queja</dt>
+            <dd class="mt-1 leading-6 text-slate-600">
+              Disconformidad no relacionada con los productos o servicios, o malestar respecto a la atención al público.
+            </dd>
+          </div>
+          <div>
+            <dt class="font-semibold">Plazo de respuesta</dt>
+            <dd class="mt-1 leading-6 text-slate-600">Máximo {empresa.plazoRespuesta} días hábiles.</dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- Columna derecha: hoja de reclamación -->
+      <FormularioReclamo />
+    </div>
+  </section>
+</Layout>

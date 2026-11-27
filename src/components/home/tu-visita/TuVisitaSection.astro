@@ -8,30 +8,50 @@
   aria-labelledby="journey-title"
   class="mx-auto w-[min(1280px,calc(100%-112px))] pt-[150px] pb-[135px] max-[800px]:w-[calc(100%-40px)] max-[800px]:py-[85px]"
 >
-  <div class="mb-[65px] flex items-center justify-between gap-8 max-[540px]:mb-[35px]">
-    <div>
-      <p data-reveal class="mb-5 flex items-center gap-[9px] text-xs font-medium text-[#007bdc]">
-        <span class="text-[22px] text-primary" aria-hidden="true">✦</span>
-        Paso a paso, contigo
-      </p>
-      <h2 data-reveal id="journey-title" class="text-[clamp(32px,3.2vw,46px)] leading-[1.06] font-medium tracking-[-0.045em]">
-        Tu camino a una mejor<br />visión empieza aquí.
-      </h2>
-      <p data-reveal class="mt-[22px] text-[13px] leading-[1.7] text-[#69757d]">
-        Queremos que tu visita sea sencilla y cercana.<br />
-        Conoce cómo te acompañamos antes, durante<br />
-        y después de tu evaluación.
-      </p>
+  <div class="grid grid-cols-2 items-start gap-12 max-[900px]:grid-cols-1">
+    <!-- Columna izquierda: widget de reserva de Doctoralia -->
+    <div data-reveal class="min-w-0 max-[900px]:order-2">
+      <a
+        id="zl-url"
+        class="zl-url"
+        href="https://www.doctoralia.pe/perfil/jose-manuel-salazar-zambrano"
+        rel="nofollow"
+        data-zlw-doctor="jose-manuel-salazar-zambrano"
+        data-zlw-type="big_with_calendar"
+        data-zlw-opinion="false"
+        data-zlw-hide-branding="true"
+        data-zlw-saas-only="true"
+        data-zlw-a11y-title="Widget de reserva de citas médicas"
+      >Agendar cita</a>
+      <script is:inline>!function($_x,_s,id){var js,fjs=$_x.getElementsByTagName(_s)[0];if(!$_x.getElementById(id)){js = $_x.createElement(_s);js.id = id;js.src = "//platform.docplanner.com/js/widget.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","zl-widget-s");</script>
     </div>
 
-    <img data-reveal="right"
-      src="/images/imagen4.webp"
-      alt="Equipo de Opthalmica Visión junto a pacientes en la sala de espera"
-      width="1200"
-      height="800"
-      loading="lazy"
-      decoding="async"
-      class="aspect-3/2 w-[clamp(280px,40vw,520px)] shrink-0 rounded-[17px] object-cover object-center max-[540px]:hidden"
-    />
+    <!-- Columna derecha: texto e imagen -->
+    <div class="flex flex-col gap-10 max-[900px]:order-1">
+      <div>
+        <p data-reveal class="mb-5 flex items-center gap-[9px] text-xs font-medium text-[#007bdc]">
+          <span class="text-[22px] text-primary" aria-hidden="true">✦</span>
+          Paso a paso, contigo
+        </p>
+        <h2 data-reveal id="journey-title" class="text-[clamp(32px,3.2vw,46px)] leading-[1.06] font-medium tracking-[-0.045em]">
+          Tu camino a una mejor<br />visión empieza aquí.
+        </h2>
+        <p data-reveal class="mt-[22px] text-[13px] leading-[1.7] text-[#69757d]">
+          Queremos que tu visita sea sencilla y cercana.<br />
+          Conoce cómo te acompañamos antes, durante<br />
+          y después de tu evaluación.
+        </p>
+      </div>
+
+      <img data-reveal="right"
+        src="/images/imagen4.webp"
+        alt="Equipo de Opthalmica Visión junto a pacientes en la sala de espera"
+        width="1200"
+        height="800"
+        loading="lazy"
+        decoding="async"
+        class="aspect-3/2 w-full rounded-[17px] object-cover object-center max-[540px]:hidden"
+      />
+    </div>
   </div>
 </section>

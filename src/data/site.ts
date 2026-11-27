@@ -17,6 +17,15 @@ export const contacto = {
   horario: ["Lun – Sáb: 9:00 am a 1:00 pm /", "3:00 pm a 8:00 pm"],
 };
 
+// TODO: completar con los datos legales reales de la empresa (aparecen en el Libro de Reclamaciones)
+export const empresa = {
+  razonSocial: "RAZÓN SOCIAL S.A.C.",
+  ruc: "20611270837",
+  direccion: "Morona 373, Iquitos, Loreto, Perú",
+  /** Plazo de respuesta a reclamos, en días hábiles */
+  plazoRespuesta: 15,
+};
+
 export const navegacion = [
   { label: "Nosotros", href: "/nosotros" },
   { label: "Servicios", href: "/servicios", conSubmenu: true },
